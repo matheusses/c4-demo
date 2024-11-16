@@ -1,0 +1,20 @@
+@startuml wallet-platform-context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title "Wallet Platform"
+
+Person(customer, "Customer", "Wallet user")
+
+System(walletPlatform, "Wallet Platform", "Wallet Platform to manage wallet")
+
+System_Ext(secret_manager, "Secret Manager", "Credentials manager")
+System_Ext(apm, "APM", "Application Performance Monitoring")
+System_Ext(collector, "OTEL Collector", "OTEL Collector to collect metrics")
+System_Ext(payment_gateway, "Payment Gateway", "Payment Gateway to process payments")
+
+Rel(customer, walletPlatform, "Use Wallet", "HTTPS")
+Rel(walletPlatform, secret_manager, "Use Credentials", "HTTPS")
+Rel(walletPlatform, apm, "Monitor Performance", "HTTPS")
+Rel(walletPlatform, collector, "Collect Metrics", "HTTPS")
+Rel(walletPlatform, payment_gateway, "Process Payments", "HTTPS")
+@enduml
